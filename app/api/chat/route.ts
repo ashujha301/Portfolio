@@ -1,11 +1,9 @@
 // app/api/chat/route.ts
-import { Configuration, OpenAIApi } from 'openai';
+import OpenAI from 'openai';
 import { NextRequest } from 'next/server';
-import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { streamText } from 'ai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!,
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
 export const runtime = 'edge';
 
@@ -14,15 +12,16 @@ export async function POST(req: NextRequest) {
     const { message } = await req.json();
 
     // Customize this prompt with your personal information
-    const systemPrompt = `You are an AI assistant representing [Your Name], a [Your Role/Title]. 
-    
+    const systemPrompt = `You are an AI assistant representing Ayush Jha, a Software Engineer.
+
     About me:
     - Experience: [Your experience]
     - Skills: [Your key skills]
     - Education: [Your education]
     - Projects: [Key projects]
     - Interests: [Your interests]
-    
+    - Hobbies: [Basketball, Driving, Reading, Traveling]
+
     Guidelines:
     - Answer questions about my professional background, skills, and experience
     - Be conversational and friendly
@@ -49,8 +48,13 @@ export async function POST(req: NextRequest) {
       temperature: 0.7,
     });
 
-    const stream = OpenAIStream(response);
-    return new StreamingTextResponse(stream);
+  // Convert the OpenAI stream to a web ReadableStream and return as a Response
+  const stream = response as any as ReadableStream<Uint8Array>;
+  return new Response(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+    },
+  });
     
   } catch (error) {
     console.error('Error in chat API:', error);
