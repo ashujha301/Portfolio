@@ -57,7 +57,7 @@ export const projects = [
   },
 ];
 
-export const experienceSectionText = `Over the past 3+ years, i've had the oppurtunity to work on a wide range of complex projects, colloborate with talented individuals and learn from some of the best in the industry. Here are some of the highlights of my journey so far.`;
+export const experienceSectionText = `Over the past 2+ years, i've had the oppurtunity to work on a wide range of complex projects, colloborate with talented individuals and learn from some of the best in the industry. Here are some of the highlights of my journey so far.`;
 
 export type Experience = {
   id: number;
@@ -115,8 +115,8 @@ export const experiences: Experience[] = [
 ];
 
 export const socials = {
-  linkedin: "https://www.linkedin.com/in/numan-javed-1ba2b4315/",
-  github: "https://www.github.com/numanjvd82",
+  linkedin: "https://www.linkedin.com/in/ayush-jha301/",
+  github: "https://github.com/ashujha301",
 };
 
 export type FAQItem = {

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useRef } from "react";
 import { socials } from "../data";
 
-const EMAIL = "numanjaved2001@gmail.com";
-const LOCATION = "Islamabad, Pakistan";
+const EMAIL = "ashujha301@gmail.com";
+const LOCATION = "Bangalore, India";
 
 export default function Footer() {
   const ref = useRef<HTMLDivElement>(null);
@@ -214,7 +214,7 @@ export default function Footer() {
           variants={sectionVariants}
         >
           <p className="text-center sm:text-left">
-            © {currentYear} Numan Javed. All rights reserved.
+            © {currentYear} Ayush Jha. All rights reserved.
           </p>
         </motion.div>
       </div>

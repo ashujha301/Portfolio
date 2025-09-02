@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { MenuIcon, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ThemeSelector } from "./ThemeSelector";
 
 type Props = {
   setHovered: (value: boolean) => void;
@@ -25,6 +26,7 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Links with ThemeSelector before Projects
   const links = [
     {
       id: 3,
@@ -46,16 +48,6 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => setHovered(false);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const handleMobileNavClick = (link: string) => {
-    lenis?.scrollTo(link);
-    setMobileMenuOpen(false);
-  };
-
-  // Burger menu animation variants
   const burgerVariants = {
     closed: {
       rotate: 0,
@@ -67,7 +59,6 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
     },
   };
 
-  // Mobile menu overlay variants
   const overlayVariants = {
     closed: {
       opacity: 0,
@@ -83,7 +74,6 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
     },
   };
 
-  // Mobile menu container variants
   const menuVariants = {
     closed: {
       x: "100%",
@@ -103,22 +93,6 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
     },
   };
 
-  // Mobile menu items stagger animation
-  const menuItemsVariants = {
-    closed: {
-      opacity: 0,
-      y: 20,
-    },
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
-
   const containerVariants = {
     closed: {},
     open: {
@@ -133,15 +107,18 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
     <ul
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="hidden md:flex gap-x-6 text-sm font-semibold font-sans relative"
+      className="hidden md:flex gap-x-6 text-sm font-semibold font-sans relative items-center"
     >
+      <li className="flex items-center">
+        <ThemeSelector />
+      </li>
       {links.map(({ id, link, name }) => (
         <li
           onClick={() => lenis?.scrollTo(link)}
           key={id}
           className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
         >
-          <Link href="">
+          <Link href={link}>
             <p>{name.toUpperCase()}</p>
           </Link>
         </li>
@@ -158,11 +135,11 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
         animate={{
           height: isScrolled ? "60px" : "80px",
           backgroundColor: isScrolled
-            ? "rgba(0, 0, 0, 0.05)" // Dark background when scrolled
-            : "rgba(0, 0, 0, 0)", // Transparent background when not scrolled
+            ? "rgba(0, 0, 0, 0.05)"
+            : "rgba(0, 0, 0, 0)",
           backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)",
           borderBottom: isScrolled
-            ? "1px solid rgba(255, 255, 255, 0.1)" // Border when scrolled
+            ? "1px solid rgba(255, 255, 255, 0.1)"
             : "1px solid rgba(255, 255, 255, 0)",
         }}
         transition={{
@@ -187,43 +164,22 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
                 stiffness: 300,
               }}
             >
-              Themes
+              Ayush Jha
             </motion.h1>
-
-            {/* Animated burger button */}
-            <motion.button
-              variants={burgerVariants}
-              animate={mobileMenuOpen ? "open" : "closed"}
-              onClick={toggleMobileMenu}
-              className="md:hidden relative z-[70] p-2 focus:outline-none"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <AnimatePresence mode="wait">
-                {mobileMenuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X size={24} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <MenuIcon size={24} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
-
+            {/* Mobile: ThemeSelector left of burger menu, Desktop: in Links */}
+            <div className="flex md:hidden items-center gap-2">
+              <ThemeSelector />
+              <motion.button
+                variants={burgerVariants}
+                animate={mobileMenuOpen ? "open" : "closed"}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="relative z-[70] p-2 focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <MenuIcon size={24} />
+              </motion.button>
+            </div>
             <Links />
           </div>
         </div>
@@ -238,9 +194,8 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
             animate="open"
             exit="closed"
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] md:hidden"
-            onClick={toggleMobileMenu}
+            onClick={() => setMobileMenuOpen(false)}
           >
-            {/* Mobile Menu Container */}
             <motion.div
               variants={menuVariants}
               initial="closed"
@@ -249,11 +204,9 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
               className="absolute top-0 right-0 h-full w-80 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl border-l border-white/10"
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              {/* Menu Content */}
               <div className="flex flex-col h-full pt-24 px-8">
-                {/* Close button */}
                 <motion.button
-                  onClick={toggleMobileMenu}
+                  onClick={() => setMobileMenuOpen(false)}
                   className="absolute top-6 right-6 p-2 text-white hover:text-gray-300 transition-colors duration-200"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -263,70 +216,27 @@ export const Navbar: React.FC<Props> = ({ setHovered }) => {
                 >
                   <X size={24} />
                 </motion.button>
-
-                {/* Decorative line */}
                 <div className="w-12 h-px bg-gradient-to-r from-white/50 to-transparent mb-8"></div>
-
-                {/* Navigation Links */}
                 <motion.nav
                   variants={containerVariants}
                   initial="closed"
                   animate="open"
                   className="flex flex-col space-y-8"
                 >
-                  {links.map(({ id, link, name }, index) => (
-                    <motion.div
+                  {links.map(({ id, link, name }) => (
+                    <motion.a
                       key={id}
-                      variants={menuItemsVariants}
-                      className="relative"
+                      href={link}
+                      className="text-white text-lg font-semibold cursor-pointer"
+                      variants={containerVariants}
+                      onClick={() => setMobileMenuOpen(false)}
                     >
-                      <motion.button
-                        onClick={() => handleMobileNavClick(link)}
-                        className="text-white text-2xl font-bold tracking-wider uppercase font-sans hover:text-gray-300 transition-colors duration-200 relative group"
-                        whileHover={{ x: 10 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        {/* Hover line */}
-                        <motion.div
-                          className="absolute -left-4 top-1/2 w-2 h-px bg-white"
-                          initial={{ width: 0 }}
-                          whileHover={{ width: 8 }}
-                          transition={{ duration: 0.2 }}
-                        />
-                        {name}
-
-                        {/* Number indicator */}
-                        <motion.span
-                          className="absolute -right-8 top-0 text-xs text-gray-500 font-mono"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: index * 0.1 + 0.5 }}
-                        >
-                          0{index + 1}
-                        </motion.span>
-                      </motion.button>
-                    </motion.div>
+                      {name}
+                    </motion.a>
                   ))}
                 </motion.nav>
-
-                {/* Footer decorative elements */}
-                <div className="mt-auto mb-8 space-y-4">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className="space-y-2"
-                  >
-                    <div className="w-24 h-px bg-gradient-to-r from-white/30 to-transparent"></div>
-                    <p className="text-gray-400 text-sm font-mono">
-                      Full Stack Developer
-                    </p>
-                    <div className="w-16 h-px bg-gradient-to-r from-white/20 to-transparent"></div>
-                  </motion.div>
-                </div>
+                <div className="mt-auto mb-8 space-y-4"></div>
               </div>
-
-              {/* Decorative background pattern */}
               <div className="absolute inset-0 opacity-5 pointer-events-none">
                 <div className="absolute top-1/4 right-8 w-32 h-32 border border-white/20 rounded-full"></div>
                 <div className="absolute bottom-1/4 right-16 w-20 h-20 border border-white/10 rounded-full"></div>

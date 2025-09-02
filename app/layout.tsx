@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import SmoothScrolling from "./components/ui/SmoothScrolling";
+import ChatWidget from "./components/ChatWidget";
+import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
 
 const aeonikRegular = localFont({
@@ -18,9 +20,9 @@ const sofiaProRegular = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Numan Javed | Full Stack Developer Portfolio",
+  title: "Ayush Jha Portfolio",
   description:
-    "Explore Numan Javed's portfolio showcasing expertise in full-stack development, innovative projects, and professional achievements in web technologies.",
+    "Explore Ayush's portfolio showcasing expertise in Software Engineering, innovative projects, and professional achievements.",
 };
 
 export default function RootLayout({
@@ -33,7 +35,16 @@ export default function RootLayout({
       <body
         className={`${aeonikRegular.variable} ${sofiaProRegular.variable}  antialiased`}
       >
-        <SmoothScrolling>{children}</SmoothScrolling>
+        <ThemeProvider
+          attribute="data-theme"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange={false}
+        >
+          <SmoothScrolling>{children}</SmoothScrolling>
+          <ChatWidget />
+        </ThemeProvider>
+
       </body>
     </html>
   );

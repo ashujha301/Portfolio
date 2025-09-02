@@ -201,13 +201,13 @@ function AboutMe() {
           </div>
           <div className='relative lg:bottom-10 bottom-[17vh] lg:right-[33.5dvw] right-[38dvw]  flex flex-col gap-3 '>
             <div className='flex flex-row gap-2' ref={location}>
-              <MapPin /> <p className='mt-1'>Addis Ababa,Ethiopia</p>
+              <MapPin /> <p className='mt-1'>Bangalore, India</p>
             </div>
             <div className='flex flex-row gap-2' ref={Xp}>
-              <CalendarDays /> <p className='mt-1'>4 years of experience</p>
+              <CalendarDays /> <p className='mt-1'>2 years of experience</p>
             </div>
             <div className='flex flex-row gap-2' ref={Skill}>
-              <Code /> <p className='mt-1'>Full stack developer Specializing in react</p>
+              <Code /> <p className='mt-1'>Software Engineer | Full Stack Developer</p>
             </div>
 
           </div>
