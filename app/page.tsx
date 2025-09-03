@@ -9,6 +9,7 @@ import AboutMe from "./components/AboutMe";
 import { Navbar } from "./components/Navbar";
 import Projects from "./components/Projects";
 import TextPath from "./components/TextPath";
+import ChatMeSection from "./components/ChatMeSection";
 import useCustomCursor from "./hooks/useCustomCursor";
 
 export default function Home() {
@@ -38,7 +39,8 @@ export default function Home() {
       <Navbar setHovered={setHovered} />
       <Hero />
       <AboutMe/>
-      <TextPath />
+      <ChatMeSection />
+      {/* <TextPath /> */}
       <Projects />
       <Experience />
       <FAQ />

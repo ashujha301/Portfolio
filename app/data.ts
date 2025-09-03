@@ -75,10 +75,10 @@ export type Experience = {
 export const experiences: Experience[] = [
   {
     id: 1,
-    companyName: "Operational Software, Bristol, UK, Remote",
-    duration: `August 2024 - June 2025`,
-    roles: ["Full stack Developer", "JavaScript Developer", "MERN Stack"],
-    tags: ["NextJS", "NodeJS", "Typescript", "Tailwind", "SQLITE"],
+    companyName: "Saranyu Technologies",
+    duration: `August 2024 - Oct 2025`,
+    roles: ["Full stack Developer", "Software Engineer", "Frontend Developer", "Backend Developer"],
+    tags: ["NextJS", "NodeJS", "Typescript", "SCSS", "MySQL", "WordPress", "JavaScript"],
     details: {
       companyWebsite: "https://www.operationalsoftware.co",
       imagePaths: [
@@ -91,22 +91,22 @@ export const experiences: Experience[] = [
   },
   {
     id: 2,
-    companyName: "Bytewise Ltd, Islamabad, Pakistan",
-    duration: `April 2022 - November 2023`,
-    roles: ["Frontend Developer", "Innovated designs", "Motion designs"],
-    tags: ["React", "Typescript", "Styled Components", "Framer Motion", "GSAP"],
+    companyName: "Appknox, Bangalore, India",
+    duration: `May 2024 - July 2024`,
+    roles: ["Software Engineering", "Intern", "DevOps"],
+    tags: ["Go", "Typescript", "Jenkins", "CI/CD", "SARIF Report", "Security", "Python"],
     details: {
-      companyWebsite: "https://www.bytewiseltd.com/",
+      companyWebsite: "https://www.appknox.com/",
       imagePaths: ["/assets/experiences/experience-4.png"],
       description: `As a frontend developer at Bitwise, I specialized in building modern, high-performance user interfaces with React, Styled Components, CSS, and TypeScript. I focused on responsive, seamless user experiences across devices and created dynamic components for fast rendering and efficient state management. Using Styled Components, I maintained a clean, scalable, and modular codebase for easy maintenance.`,
     },
   },
   {
     id: 3,
-    companyName: "Freelancer on Upwork, Remote",
+    companyName: "Freelancer, Remote",
     duration: `January
     2021 - Present`,
-    roles: ["Frontend Developer", "UI/UX Designer", "Web Developer"],
+    roles: ["Frontend Developer", "UI/UX Designer", "Full Stack developer"],
     tags: ["Go", "PHP", "Wordpress", "C++", "React"],
     details: {
       description: `As a freelance developer, I worked with a variety of clients to create custom websites, web applications, and user interfaces. I specialized in React, NextJS, and TypeScript, building high-performance, responsive, and user-friendly applications that met the unique needs of each client. I collaborated closely with clients to understand their vision and goals, translating them into engaging, interactive digital experiences.`,

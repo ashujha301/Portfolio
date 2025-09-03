@@ -29,6 +29,7 @@ function Hero() {
     const vantaRef = React.useRef(null);
     const vantaEffect = React.useRef<any>(null);
     const { theme } = useTheme();
+    
 
     useEffect(() => {
         // Helper to load a script only once
