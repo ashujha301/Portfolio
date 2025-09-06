@@ -36,8 +36,8 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="dark"
-          enableSystem={false}
+          defaultTheme="light"
+          enableSystem={true}
           disableTransitionOnChange={false}
         >
           <SmoothScrolling>{children}</SmoothScrolling>

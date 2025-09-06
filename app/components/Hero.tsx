@@ -122,7 +122,7 @@ function Hero() {
                 { opacity: 0 },
                 { opacity: 1, duration: 1, delay: 2 }
             ).to(me.current, {
-                y: '60vh',
+                y: '70vh',
                 x: '-20vw',
                 fontWeight: "lighter",
                 backgroundColor: "var(--background)", // Use CSS variable instead of hardcoded color
@@ -170,7 +170,7 @@ function Hero() {
 
     return (
         <section id='hero'>
-            <div className="h-[100vh] lg:mt-40">
+            <div className="cursor-auto md:cursor-none h-[100vh] lg:mt-40">
                 <ScrollProgressBar />
                 {/* Vanta.js Background Container */}
                 <div
