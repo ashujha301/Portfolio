@@ -6,9 +6,8 @@ import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import AboutMe from "./components/AboutMe";
-import { Navbar } from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
-import TextPath from "./components/TextPath";
 import ChatMeSection from "./components/ChatMeSection";
 import useCustomCursor from "./hooks/useCustomCursor";
 
@@ -37,10 +36,9 @@ export default function Home() {
         "
       ></motion.div>
       <Navbar setHovered={setHovered} />
+      <ChatMeSection />
       <Hero />
       <AboutMe/>
-      <ChatMeSection />
-      {/* <TextPath /> */}
       <Projects />
       <Experience />
       <FAQ />

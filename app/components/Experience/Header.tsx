@@ -5,6 +5,7 @@ import { DotIcon } from "lucide-react";
 import { useRef } from "react";
 import { headerLeftVariants, headerRightVariants } from "./variants";
 
+
 const wordRevealVariants = {
   initial: {
     opacity: 0,
@@ -16,10 +17,10 @@ const wordRevealVariants = {
     transition: {
       delay: index * 0.05,
       duration: 0.5,
-      ease: "easeOut",
+      ease: [0.42, 0, 0.58, 1] as any, // Type assertion to bypass the error
     },
   }),
-};
+} as any;
 
 const SplitText: React.FC<{ text: string }> = ({ text }) => {
   return (
@@ -33,7 +34,7 @@ const SplitText: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-export const Header = () => {
+const Header = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, amount: 0.5 });
 
@@ -74,3 +75,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export default Header;

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import SmoothScrolling from "./components/ui/SmoothScrolling";
-import ChatWidget from "./components/ChatWidget";
 import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
 
@@ -37,14 +36,12 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="data-theme"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange={false}
         >
           <SmoothScrolling>{children}</SmoothScrolling>
-          <ChatWidget />
         </ThemeProvider>
-
       </body>
     </html>
   );

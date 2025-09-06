@@ -31,10 +31,10 @@ export default function FAQ() {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut",
+        ease: "easeOut" as any, // Type assertion to bypass the error
       },
     },
-  };
+  } as any;
 
   const headerVariants = {
     hidden: { opacity: 0, y: -30 },
@@ -43,10 +43,10 @@ export default function FAQ() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as any,
       },
     },
-  };
+  } as any;
 
   return (
     <section className="cursor-auto md:cursor-none py-20 px-4 sm:px-6 lg:px-8 mix-blend-difference">

@@ -3,7 +3,7 @@ import { DotIcon } from "lucide-react";
 import Badge from "../ui/Badge";
 import { Detail } from "./Detail";
 
-export const Experiences = () => {
+const Experiences = () => {
   return (
     <div className="space-y-0">
       {experiences.map(
@@ -48,3 +48,5 @@ export const Experiences = () => {
     </div>
   );
 };
+
+export default Experiences;

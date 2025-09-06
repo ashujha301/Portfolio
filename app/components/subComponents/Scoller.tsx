@@ -5,8 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const ScrollProgressBar = () => {
-  const progressBarRef = useRef(null);
-  const percentageRef = useRef(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const percentageRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     // Set up GSAP ScrollTrigger
@@ -31,7 +31,7 @@ const ScrollProgressBar = () => {
   }, []);
 
   return (
-    <div className="fixed top-1/4 left-4 flex items-center">
+    <div className="hidden md:flex fixed top-1/4 left-4 items-center">
       {/* Progress Bar Container */}
       <div className="w-4 h-3/4 border-2 border-gray-300">
         {/* Progress Bar */}

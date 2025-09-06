@@ -38,19 +38,25 @@ export default function Footer() {
   };
 
   const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: {
+      opacity: 0,
+      y: 30
+    },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut" as any // Type assertion to bypass the error
+      },
     },
-  };
+  } as any;
 
   const buttonVariants = {
     hover: {
       scale: 1.1,
       backgroundColor: "#333",
-      transition: { duration: 0.3, type: "spring", stiffness: 200 },
+      transition: { duration: 0.3, type: "spring" as const, stiffness: 200 },
     },
     tap: {
       scale: 0.95,
@@ -215,6 +221,35 @@ export default function Footer() {
         >
           <p className="text-center sm:text-left">
             © {currentYear} Ayush Jha. All rights reserved.
+          </p>
+          <p className="text-center sm:text-left text-gray-400">
+            Inspired By:{" "}
+            <a
+              href="https://numanjvd82portfolio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500 transition-colors duration-200"
+            >
+              Numan
+            </a>
+            ,{" "}
+            <a
+              href="https://portofolio-website-dusky.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500 transition-colors duration-200"
+            >
+              Kerim
+            </a>
+            ,{" "}
+            <a
+              href="https://threejscc-portfolio.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500 transition-colors duration-200"
+            >
+              Adrian
+            </a>
           </p>
         </motion.div>
       </div>

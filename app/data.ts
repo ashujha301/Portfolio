@@ -1,59 +1,56 @@
 export const projects = [
   {
     id: 1,
-    name: "Cube Master",
-    technologies: [
-      "NextJS",
-      "React Three Fiber",
-      "Three.js",
-      "Prisma",
-      "NextAuth",
-      "TypeScript",
-    ],
-    description: `A fully interactive 3D Rubik's Cube simulator with multiple game modes, user authentication, and progress tracking. Features include Classic Mode, Time Attack, Daily Challenges, Google OAuth authentication, detailed analytics, and smooth 3D animations. Built with cutting-edge web technologies for an immersive puzzle-solving experience.`,
-    githubLink: "https://github.com/numanjvd82/cubemaster",
-    liveAppLink: "https://cubemaster.vercel.app/",
-    imagePath: "/assets/projects/cube.png",
+    name: "CodeRank",
+    technologies: ["ReactJS", "NodeJS", "TypeScript", "Docker", "AWS", "Redux"],
+    description: `Cloud-based coding editor with multi-language support, secure on-demand execution, and persistent cloud file storage—write, run, and save projects from any device with real-time feedback.`,
+    githubLink: "https://github.com/ashujha301/CodeRank",
+    imagePath: "/assets/projects/CodeRank.png",
   },
   {
     id: 2,
-    name: "Pass Keeper",
-    technologies: ["NextJS", "Cryptography", "Encryption", "Algorithims"],
-    description: `Pass Keeper is a practical and secure password manager app built with ReactJS, designed to provide a seamless and user-friendly experience. Featuring a modern and sleek interface, Pass Keeper makes managing your passwords intuitive and efficient.`,
-    githubLink: "https://github.com/numanjvd82/pass-keeper",
-    imagePath: "/assets/projects/project-5.png",
+    name: "Appknox Plugin",
+    technologies: [
+      "Java",
+      "Jenkins",
+      "CI/CD",
+      "GitHub Actions",
+      "TypeScript",
+    ],
+    description: `Jenkins plugin that uploads your mobile build (APK/IPA) to Appknox for automated security scanning and fails the CI based on a configurable risk threshold. Supports Freestyle and Pipeline via the AppKnoxScanner step.`,
+    githubLink: "https://github.com/jenkinsci/appknox-scanner-plugin",
+    liveAppLink: "https://plugins.jenkins.io/appknox-scanner/",
+    imagePath: "/assets/projects/Project1.png",
   },
   {
     id: 3,
-    name: "Multi Cipher Framework",
-    technologies: ["ReactJS", "Cryptography", "Typescript", "Algorithims"],
-    description: `Built with React, this project pairs powerful cipher functions with a sleek and intuitive user interface, providing users with a seamless experience. Each cipher comes with customizable settings, allowing users to easily encrypt and decrypt messages while understanding the mechanics behind these historical encryption techniques.`,
-    githubLink: "https://multicipherframework.netlify.app/",
-    liveAppLink: "https://multi-cipher-framework",
-    imagePath: "/assets/projects/project-2.jpeg",
+    name: "Amazon Clone",
+    technologies: ["ReactJS", "NodeJS", "JWT", "Authentication"],
+    description: `E-commerce UI clone with React (CRA) and a simple Node/Express backend scaffold. Includes product listing, cart/checkout flow UI, responsive layout, routing and basic state management. Deployed on Vercel for quick demos.`,
+    githubLink: "https://github.com/ashujha301/Amazon-clone",
+    imagePath: "/assets/projects/AmazonClone.png",
   },
   {
     id: 4,
-    name: "Text to Image Converter",
-    technologies: ["AI", "Machine Learning", "NextJS", "Typescript", "ShadCN"],
-    description: `Welcome to AI Toolkit, a Next.js project built with ShadCN UI and powered by Hugging Face models. This project aims to automate classical tasks with AI tools. Currently, it supports generating images from text prompts, with more features coming soon!`,
-    githubLink: "https://github.com/numanjvd82/nextjs-ai-toolkit",
-    imagePath: "/assets/projects/project-1.png",
+    name: "Task-Manager",
+    technologies: ["React", "Redux", "NodeJS", "Typescript", "Vercel"],
+    description: `Task management app (Vite + React client with a lightweight Node server). Create, update, complete and delete tasks with priority & due dates, plus filtering/sorting for productivity. Built as a clean, fast demo with a minimal API and deployed to Vercel.`,
+    githubLink: "https://github.com/ashujha301/Task-Manager",
+    liveAppLink: "https://task-manager-zeta-mocha.vercel.app/",
+    imagePath: "/assets/projects/TaskManager.png",
   },
   {
     id: 5,
-    name: "Wilderness Weather App",
+    name: "Canteen Web App",
     technologies: [
-      "Data Transformation",
-      "Graphs",
-      "Server Side",
-      "Typescript",
-      "AntD",
+      "React",
+      "Firebase",
+      "JQuery"
     ],
-    description: `This project is a weather dashboard application built using React and Ant Design (Antd). The application displays various weather-related data fetched from the Open Meteo API, including current weather, hourly forecasts, daily forecasts, and additional information like air quality, UV index, and dust and pollen levels.`,
-    githubLink: "https://github.com/numanjvd82/nextjs-ai-toolkit",
-    liveAppLink: "https://wilderness-weather-station.netlify.app",
-    imagePath: "/assets/projects/project-3.png",
+    description: `AF Canteen Bamrauli booking system built with React + Firebase and hosted on Vercel. Generates unique customer tokens to reduce wait times, with an admin dashboard to verify visits and export booking data to Excel. Redux used for predictable state management.`,
+    githubLink: "https://github.com/ashujha301/CanteenWebApp",
+    liveAppLink: "https://afscanteen.vercel.app/",
+    imagePath: "/assets/projects/CanteenWebApp.png",
   },
 ];
 
@@ -80,13 +77,12 @@ export const experiences: Experience[] = [
     roles: ["Full stack Developer", "Software Engineer", "Frontend Developer", "Backend Developer"],
     tags: ["NextJS", "NodeJS", "Typescript", "SCSS", "MySQL", "WordPress", "JavaScript"],
     details: {
-      companyWebsite: "https://www.operationalsoftware.co",
+      companyWebsite: "https://saranyu.in/",
       imagePaths: [
-        "/assets/experiences/experience-1.png",
-        "/assets/experiences/experience-2.png",
-        "/assets/experiences/experience-3.png",
+        "/assets/experiences/Saranyu-1.png",
+        "/assets/experiences/Saranyu-2.png",
       ],
-      description: `As a Full Stack Developer at Operational Software, I specialized in creating bespoke features using TypeScript, ReactJS, NodeJS, CSS, and a variety of other technologies. My role involved handling both front-end and back-end development, ensuring seamless integration and robust functionality across the entire stack.`,
+      description: `As a Full Stack Developer I Contributed across client projects: Next.js frontend and Node.js (Fastify) / PHP APIs for scalable web apps. Set up CI/CD with GitHub Actions, collaborated through Git PR reviews, and worked in Agile ceremonies (sprint planning, standups). Focus on maintainable TypeScript code, performance and reliable deployments.`,
     },
   },
   {
@@ -94,22 +90,25 @@ export const experiences: Experience[] = [
     companyName: "Appknox, Bangalore, India",
     duration: `May 2024 - July 2024`,
     roles: ["Software Engineering", "Intern", "DevOps"],
-    tags: ["Go", "Typescript", "Jenkins", "CI/CD", "SARIF Report", "Security", "Python"],
+    tags: ["Go", "Typescript", "Jenkins", "CI/CD", "SARIF Report", "Security", "Python", "Java"],
     details: {
       companyWebsite: "https://www.appknox.com/",
-      imagePaths: ["/assets/experiences/experience-4.png"],
-      description: `As a frontend developer at Bitwise, I specialized in building modern, high-performance user interfaces with React, Styled Components, CSS, and TypeScript. I focused on responsive, seamless user experiences across devices and created dynamic components for fast rendering and efficient state management. Using Styled Components, I maintained a clean, scalable, and modular codebase for easy maintenance.`,
+      imagePaths: [
+        "/assets/experiences/Appknox-1.png",
+        "/assets/experiences/Appknox-2.png",
+      ],
+      description: `As a Software Engineering Intern at Appknox, I Implemented SARIF report generation in the Appknox CLI to enable GitHub Advanced Security. Built and integrated a Jenkins CI/CD plugin to automate Appknox scans for enterprise clients. Created a Python web scraper to collect metadata for 15k+ Play Store apps, improving data-processing efficiency by ~35%. Learned Go and contributed to the Appknox backend API, enhancing my full-stack skills in a fast-paced startup environment.`,
     },
   },
   {
     id: 3,
     companyName: "Freelancer, Remote",
-    duration: `January
-    2021 - Present`,
+    duration: `November 2023 - March 2024`,
     roles: ["Frontend Developer", "UI/UX Designer", "Full Stack developer"],
-    tags: ["Go", "PHP", "Wordpress", "C++", "React"],
+    tags: ["React", "Firebase", "Javascript", "Figma"],
     details: {
       description: `As a freelance developer, I worked with a variety of clients to create custom websites, web applications, and user interfaces. I specialized in React, NextJS, and TypeScript, building high-performance, responsive, and user-friendly applications that met the unique needs of each client. I collaborated closely with clients to understand their vision and goals, translating them into engaging, interactive digital experiences.`,
+      imagePaths: ["/assets/experiences/CanteenWebApp.png"],
     },
   },
 ];
@@ -126,43 +125,33 @@ export type FAQItem = {
 
 export const faqData: FAQItem[] = [
   {
-    question: "What modern web technologies do you specialize in?",
+    question: "Where are you located, and how do you like to collaborate?",
     answer:
-      "I specialize in React, Next.js, TypeScript, Node.js, Websockets and a liitle touch of solidity and modern web development. I have experience with Three.js for 3D web experiences and I'm familiar with PostgreSQL, MongoDB and pgvector. I'm always learning and adapting to new technologies to deliver cutting-edge solutions.",
+      "I’m based in Bengaluru, India. I work comfortably within Agile routines, prefer asynchronous communication, and keep progress visible through GitHub issues/PRs and CI pipeline dashboards.",
   },
   {
-    question: "How do you ensure pixel-perfect designs?",
+    question: "Can you adapt quickly to new tools and changing requirements?",
     answer:
-      "I have a keen eye for detail and take pride in delivering pixel-perfect implementations. I carefully review designs, use precise measurements, and test across multiple devices and browsers to ensure every element matches the intended design exactly.",
+      "Absolutely. I enjoy learning new stacks and evolving with project scope. If a new framework, API, or pattern is needed, I research fast, prototype, and implement a solution that fits the goal.",
   },
   {
-    question: "Are you adaptable to new technologies and requirements?",
+    question: "What’s your approach to deployment and modern web standards?",
     answer:
-      "Absolutely! I thrive on learning new technologies and adapting to changing project requirements. Whether it's a new framework, API, or design pattern, I quickly research, experiment, and implement solutions that meet your specific needs.",
+      "I deploy to platforms like Vercel, Netlify, and AWS. My focus is responsive UIs, performance optimization, solid SEO, and clean, scalable code. I’m comfortable with Git-based workflows and collaborative development.",
   },
   {
-    question: "What's your experience with 3D web development?",
+    question: "Do you own projects end-to-end?",
     answer:
-      "I have hands-on experience with Three.js and have built interactive 3D projects. While I continue to expand my 3D development skills, I can create engaging 3D experiences and am eager to take on more complex 3D challenges.",
+      "Yes. I take full ownership—from planning to delivery—communicating proactively, meeting timelines, solving issues independently, and making sure the final outcome meets or exceeds expectations.",
   },
   {
-    question: "How do you handle deployment and modern web practices?",
+    question: "How do you drive innovation and tackle tough problems?",
     answer:
-      "I use modern deployment strategies with platforms like Vercel, Netlify, and AWS. I implement responsive design, optimize performance, ensure SEO best practices, and maintain clean, scalable code. I'm experienced with Git workflows and collaborative development.",
+      "I combine research with experimentation to find practical, creative solutions. I’m willing to try new approaches while maintaining code quality and a strong user experience.",
   },
   {
-    question: "Do you take ownership of projects from start to finish?",
+    question: "What does your typical workflow look like?",
     answer:
-      "Yes, I take full ownership of projects and am committed to delivering exceptional results. I communicate proactively, meet deadlines, solve problems independently, and ensure the final product exceeds expectations. Your success is my priority.",
-  },
-  {
-    question: "How do you approach innovation and problem-solving?",
-    answer:
-      "I bring fresh perspectives and innovative solutions to every project. I research best practices, experiment with new approaches, and find creative ways to solve complex problems. I'm not afraid to push boundaries while maintaining code quality and user experience.",
-  },
-  {
-    question: "What can I expect from your work process?",
-    answer:
-      "You can expect transparent communication, regular updates, and meticulous attention to detail. I deliver clean, maintainable code, provide realistic timelines, and ensure every aspect of the project meets your standards. I stand behind my work with ongoing support.",
+      "Clear communication, regular checkpoints, and attention to detail. I ship maintainable code, provide realistic estimates, and support the product after launch to ensure long-term reliability.",
   },
 ];

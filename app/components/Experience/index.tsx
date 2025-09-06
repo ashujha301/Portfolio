@@ -1,5 +1,5 @@
-import { Experiences } from "./Experiences";
-import { Header } from "./Header";
+import Experiences from "./Experiences";
+import  Header from "./Header";
 
 export default function Experience() {
   return (
