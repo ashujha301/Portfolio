@@ -33,7 +33,7 @@ export default function Projects() {
     <div
       ref={container}
       id="projects"
-      className="cursor-auto md:cursor-none px-6 pt-32 pb-20 mt-[50vh]"
+      className="cursor-auto md:cursor-none px-6 pt-8 pb-20 mt-[20vh]"
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 mix-blend-difference text-white">

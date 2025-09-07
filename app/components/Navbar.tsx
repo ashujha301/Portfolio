@@ -16,6 +16,8 @@ const Navbar: React.FC<Props> = ({ setHovered }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +30,7 @@ const Navbar: React.FC<Props> = ({ setHovered }) => {
   }, []);
 
   const links = [
-    { id: 2, name: "Virtual Me", link: "#work" },
+    { id: 2, name: "AI Me", link: "#work" },
     { id: 3, name: "Projects", link: "#projects" },
     { id: 4, name: "Experience", link: "#experience" },
     { id: 5, name: "Contacts", link: "#contacts" },
@@ -84,12 +86,12 @@ const Navbar: React.FC<Props> = ({ setHovered }) => {
     </ul>
   );
 
+  // if (!mounted) return null;
+
   return (
     <>
       <motion.div
-        className={`navbar-fixed cursor-auto md:cursor-none fixed top-0 left-0 right-0 z-50 ${
-          theme === "dark" ? "text-white" : "text-black"
-        }`}
+        className={`navbar-fixed fixed top-0 left-0 right-0 z-50 ${mounted ? (theme === "dark" ? "text-white" : "text-black") : "text-transparent"}`}
         animate={{
           height: isScrolled ? "60px" : "80px",
           backgroundColor: isScrolled ? "rgba(0, 0, 0, 0.05)" : "rgba(0, 0, 0, 0)",

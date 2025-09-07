@@ -54,7 +54,7 @@ export const projects = [
   },
 ];
 
-export const experienceSectionText = `Over the past 2+ years, i've had the oppurtunity to work on a wide range of complex projects, colloborate with talented individuals and learn from some of the best in the industry. Here are some of the highlights of my journey so far.`;
+export const experienceSectionText = `Over the past 1.5+ years, i've had the oppurtunity to work on a wide range of complex projects, colloborate with talented individuals and learn from some of the best in the industry. Here are some of the highlights of my journey so far.`;
 
 export type Experience = {
   id: number;
@@ -89,7 +89,7 @@ export const experiences: Experience[] = [
     id: 2,
     companyName: "Appknox, Bangalore, India",
     duration: `May 2024 - July 2024`,
-    roles: ["Software Engineering", "Intern", "DevOps"],
+    roles: ["Software Engineering", "Intern","Backend", "DevOps"],
     tags: ["Go", "Typescript", "Jenkins", "CI/CD", "SARIF Report", "Security", "Python", "Java"],
     details: {
       companyWebsite: "https://www.appknox.com/",

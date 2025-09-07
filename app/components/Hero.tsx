@@ -193,9 +193,13 @@ function Hero() {
                     </div>
                     <div>
                         <p className="lg:text-[5rem] text-6xl font-bold relative lg:bottom-[30vh] bottom-0 lg:top-[-5rem] top-[3vh] lg:ml-[6dvw] ml-0">Hi, I'm Ayush</p>
-                        <div className='flex relative gap-10 lg:left-[11dvw] left-[8vh] bottom-[-9vh] lg:bottom-[4rem]'>
-                            <Link className='hover:cursor-pointer' href={'https://github.com/ashujha301'}> <Github className="w-10 h-10 lg:ml-[10dvw] ml-0 " /></Link>
-                            <Link className='hover:cursor-pointer' href={'https://www.linkedin.com/in/ayush-jha301/'}> <Linkedin className="w-10 h-10 ml-0 " /></Link>
+                        <div className='flex justify-center items-center gap-10 relative bottom-[-9vh] lg:bottom-[4rem]'>
+                            <Link className='hover:cursor-pointer' href={'https://github.com/ashujha301'}>
+                                <Github className="w-10 h-10" />
+                            </Link>
+                            <Link className='hover:cursor-pointer' href={'https://www.linkedin.com/in/ayush-jha301/'}>
+                                <Linkedin className="w-10 h-10" />
+                            </Link>
                         </div>
                     </div>
                 </div>

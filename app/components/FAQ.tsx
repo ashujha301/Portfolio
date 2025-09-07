@@ -49,7 +49,7 @@ export default function FAQ() {
   } as any;
 
   return (
-    <section className="cursor-auto md:cursor-none py-20 px-4 sm:px-6 lg:px-8 mix-blend-difference">
+    <section className="font-sans cursor-auto md:cursor-none py-20 px-4 sm:px-6 lg:px-8 mix-blend-difference">
       <div className="max-w-4xl mx-auto" ref={ref}>
         {/* Header */}
         <motion.div
@@ -135,7 +135,7 @@ export default function FAQ() {
 
         {/* Call to Action */}
         <motion.div
-          className="mt-16 text-gray-600 text-center"
+          className="mt-16 text-gray-400 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.8, duration: 0.5 }}
@@ -148,8 +148,8 @@ export default function FAQ() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => {
-              const email = "numanjaved2001@gmail.com";
-              window.location.href = `mailto:${email}?subject=Project Inquiry&body=Hi Numan, I have a question about...`;
+              const email = "ashujha301@gmail.com";
+              window.location.href = `mailto:${email}?subject=Project Inquiry&body=Hi Ayush, I have a question about...`;
             }}
           >
             Get in Touch

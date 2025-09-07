@@ -108,10 +108,10 @@ function AboutMe() {
   ];
 
   return (
-    <div className="cursor-auto md:cursor-none overflow-hidden lg:h-[150vh] w-full z-[-1]">
-      <div className="flex flex-col lg:flex-row py-[10vh] w-full">
+    <div className="relative overflow-hidden lg:h-[150vh] w-full">
+      <div className="font-sans flex flex-col lg:flex-row py-[10vh] w-full">
         {/* Left Section (About) */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-4 sm:px-2 mb-10 lg:mb-0">
+        <div className="text-m w-full lg:w-1/2 flex flex-col items-center justify-center px-4 sm:px-2 mb-10 lg:mb-0">
           <div className="h-[35vh] lg:h-[25vh]" />
           <div className="flex flex-col gap-3 w-full max-w-md mx-auto">
             <div className="flex flex-row gap-2 items-center" ref={location}>
@@ -120,7 +120,7 @@ function AboutMe() {
             </div>
             <div className="flex flex-row gap-2 items-center" ref={Xp}>
               <CalendarDays />
-              <p className="mt-1 break-words">2+ years of experience</p>
+              <p className="mt-1 break-words">1.5+ years of experience</p>
             </div>
             <div className="flex flex-row gap-2 items-center" ref={Skill}>
               <Code />
@@ -134,12 +134,12 @@ function AboutMe() {
             that prize ownership, clarity, and momentum.
           </p>
 
-          <Link
+          <button
             className="mt-10 bg-black rounded-lg flex flex-row items-center justify-center text-white p-3 gap-2 w-full max-w-xs hover:border-4 hover:border-blue-900 transition-all duration-100 ease-in"
-            href="https://drive.usercontent.google.com/download?authuser=0&export=download&id=1BHgqgwwfa2cGDUrNMEtYDIwNoA8mULeu"
+            onClick={() => window.open("https://drive.usercontent.google.com/download?authuser=0&export=download&id=1BHgqgwwfa2cGDUrNMEtYDIwNoA8mULeu", "_blank")}
           >
             <ArrowDown /> Portfolio
-          </Link>
+          </button>
         </div>
 
         {/* Right Section (Skills & Value Adds) */}
@@ -164,34 +164,35 @@ function AboutMe() {
           </div>
 
           <div className="w-full max-w-xl mt-10">
-            <p className="text-2xl text-center mt-4">How I add value</p>
-            <div className="flex flex-col gap-3 mt-3 w-full">
-              <div className="flex flex-row gap-2 items-center sm:opacity-0" ref={Service1}>
-                <ArrowRight />
-                <p className="break-words">
-                  Clarify → build → iterate: turn ambiguous problems into clear specs, communicate trade-offs, and ship in small, measurable steps.
+            <p className="text-2xl text-center mt-4">Beyond the code</p>
+            <div className="flex flex-col text-base md:text-base gap-4 mt-3 w-full">
+              <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service1}>
+                <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <p className="break-words leading-relaxed">
+                  Anime & figure collector — proud weeb; favorites: <strong>Eren Yeager</strong> (AoT) & <strong>Roronoa Zoro</strong> (One Piece).
                 </p>
               </div>
-              <div className="flex flex-row gap-2 items-center sm:opacity-0" ref={Service2}>
-                <ArrowRight />
-                <p className="break-words">
-                  End-to-end ownership: design, implement, test, document, and monitor; handle incidents calmly and follow up with root-cause fixes.
+              <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service2}>
+                <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <p className="break-words leading-relaxed">
+                  Traveler & beach person — love road trips and coastal drives; beaches? always yes.
                 </p>
               </div>
-              <div className="flex flex-row gap-2 items-center sm:opacity-0" ref={Service3}>
-                <ArrowRight />
-                <p className="break-words">
-                  Code quality & maintainability: readable code, sensible abstractions, automated checks, and documentation that scales with the team.
+              <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service3}>
+                <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <p className="break-words leading-relaxed">
+                  Sports & games — basketball regular, recently picked up pickleball, always up for badminton, football and down for game nights.
                 </p>
               </div>
-              <div className="flex flex-row gap-2 items-center sm:opacity-0" ref={Service4}>
-                <ArrowRight />
-                <p className="break-words">
-                  Customer-centric outcomes: instrument what matters, reduce friction, and prioritize changes that improve reliability, performance, and UX.
+              <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service4}>
+                <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <p className="break-words leading-relaxed">
+                  Certified spontaneous friend — I'm always ready for sudden plans: hikes, beaches, parties—say the word and I'm in.
                 </p>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

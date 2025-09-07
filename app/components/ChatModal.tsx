@@ -25,6 +25,10 @@ const SECURITY_CONFIG = {
   MAX_MESSAGES_PER_SESSION: 20,
 };
 
+const SOFT_ERROR_FALLBACK =
+  "I might be responding to someone else. I will be able to help you better after your next question.";
+const SOFT_ERROR_SNIPPET = "I might be responding to someone else";
+
 // Input sanitization used while typing (do NOT trim here)
 function sanitizeForInput(input: string): string {
   if (typeof input !== 'string') return '';
@@ -243,7 +247,7 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
     } catch (error: any) {
       console.error('Error sending message:', error);
 
-      let errorMessage = "I'm having trouble connecting right now. Please try again in a moment!";
+      let errorMessage = "I might be responding to someone else. I will be able to help you better after your next question.";
       if (error.name === 'AbortError') {
         errorMessage = 'Request timed out. Please try again with a shorter message.';
       } else if (error.message?.includes('401')) {
@@ -421,23 +425,21 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                 >
                   <div className={`flex max-w-[85%] ${message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                     <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                        message.sender === 'user' ? 'bg-blue-500 ml-2' : 'mr-2'
-                      }`}
+                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${message.sender === 'user' ? 'bg-blue-500 ml-2' : 'mr-2'
+                        }`}
                     >
                       {message.sender === 'user' ? <User size={16} className="text-white" /> : <BotAvatar />}
                     </div>
                     <div
-                      className={`p-3 rounded-lg shadow-sm ${
-                        message.sender === 'user' ? 'bg-blue-500 text-white rounded-br-none' : `rounded-bl-none ${message.isError ? 'border-red-300' : ''}`
-                      }`}
+                      className={`p-3 rounded-lg shadow-sm ${message.sender === 'user' ? 'bg-blue-500 text-white rounded-br-none' : `rounded-bl-none ${message.isError ? 'border-red-300' : ''}`
+                        }`}
                       style={
                         message.sender === 'bot'
                           ? {
-                              backgroundColor: message.isError ? 'rgba(254, 226, 226, 0.1)' : 'var(--background)',
-                              color: message.isError ? '#ef4444' : 'var(--foreground)',
-                              border: `1px solid ${message.isError ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-color)'}`,
-                            }
+                            backgroundColor: message.isError ? 'rgba(254, 226, 226, 0.1)' : 'var(--background)',
+                            color: message.isError ? '#ef4444' : 'var(--foreground)',
+                            border: `1px solid ${message.isError ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-color)'}`,
+                          }
                           : {}
                       }
                     >
@@ -517,12 +519,11 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                     isRateLimited
                       ? `Rate limited - wait ${getRemainingTime()}s...`
                       : messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION
-                      ? 'Session limit reached - refresh to continue'
-                      : 'Ask me anything about my professional experience...'
+                        ? 'Session limit reached - refresh to continue'
+                        : 'Ask me anything about my professional experience...'
                   }
-                  className={`flex-1 rounded-xl px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 border transition-all ${
-                    isInputDisabled ? 'bg-white/5 border-white/5 cursor-not-allowed' : 'bg-white/10 border-white/10 focus:ring-blue-400'
-                  }`}
+                  className={`flex-1 rounded-xl px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 border transition-all ${isInputDisabled ? 'bg-white/5 border-white/5 cursor-not-allowed' : 'bg-white/10 border-white/10 focus:ring-blue-400'
+                    }`}
                   disabled={isInputDisabled}
                   maxLength={SECURITY_CONFIG.MAX_MESSAGE_LENGTH}
                   autoComplete="off"
@@ -531,9 +532,8 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                 <button
                   onClick={sendMessage}
                   disabled={!input || isInputDisabled}
-                  className={`text-white p-3 rounded-xl transition-all flex items-center justify-center min-w-[48px] ${
-                    isInputDisabled || !input ? 'bg-gray-500 cursor-not-allowed opacity-50' : 'bg-blue-500 hover:bg-blue-600'
-                  }`}
+                  className={`text-white p-3 rounded-xl transition-all flex items-center justify-center min-w-[48px] ${isInputDisabled || !input ? 'bg-gray-500 cursor-not-allowed opacity-50' : 'bg-blue-500 hover:bg-blue-600'
+                    }`}
                   title={
                     isRateLimited ? 'Rate limited' : messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION ? 'Session limit reached' : 'Send message'
                   }
