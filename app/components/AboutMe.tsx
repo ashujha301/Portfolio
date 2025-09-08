@@ -8,6 +8,7 @@ import {
   SiReact, SiNextdotjs, SiTypescript, SiNodedotjs, SiFastify, SiExpress,
   SiPython, SiDjango, SiMongodb, SiMysql, SiAmazon, SiDocker
 } from "react-icons/si";
+import { motion } from "framer-motion";
 
 function AboutMe() {
   const location = React.useRef<HTMLDivElement | null>(null)
@@ -107,6 +108,21 @@ function AboutMe() {
     "Jest (React)", "Mocha (Node.js)", "PHP", "C++"
   ];
 
+  const buttonVariants = {
+    hover: {
+      scale: 1.1,
+      backgroundColor: "#333",
+      transition: { duration: 0.3, type: "spring" as const, stiffness: 200 },
+    },
+    tap: {
+      scale: 0.95,
+      backgroundColor: "#222",
+      transition: { duration: 0.2 },
+    },
+  };
+
+  const MotionLink = motion(Link);
+
   return (
     <div className="relative overflow-hidden lg:h-[150vh] w-full">
       <div className="font-sans flex flex-col lg:flex-row py-[10vh] w-full">
@@ -134,12 +150,21 @@ function AboutMe() {
             that prize ownership, clarity, and momentum.
           </p>
 
-          <button
-            className="mt-10 bg-black rounded-lg flex flex-row items-center justify-center text-white p-3 gap-2 w-full max-w-xs hover:border-4 hover:border-blue-900 transition-all duration-100 ease-in"
-            onClick={() => window.open("https://drive.usercontent.google.com/download?authuser=0&export=download&id=1BHgqgwwfa2cGDUrNMEtYDIwNoA8mULeu", "_blank")}
+          <MotionLink
+            href="/assets/AyushJhaResume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            locale={false}
           >
-            <ArrowDown /> Portfolio
-          </button>
+            <motion.button
+              className="mt-10 bg-black rounded-lg flex flex-row items-center justify-center text-white p-3 gap-2 w-full max-w-xs hover:border-4 hover:border-blue-900 transition-all duration-100 ease-in"
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
+            >
+              Download Resume
+            </motion.button>
+          </MotionLink>
         </div>
 
         {/* Right Section (Skills & Value Adds) */}

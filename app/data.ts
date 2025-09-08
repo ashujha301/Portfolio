@@ -73,8 +73,8 @@ export const experiences: Experience[] = [
   {
     id: 1,
     companyName: "Saranyu Technologies",
-    duration: `August 2024 - Oct 2025`,
-    roles: ["Full stack Developer", "Software Engineer", "Frontend Developer", "Backend Developer"],
+    duration: `August 2024 - Present`,
+    roles: ["Full stack Developer", "Software Engineer"],
     tags: ["NextJS", "NodeJS", "Typescript", "SCSS", "MySQL", "WordPress", "JavaScript"],
     details: {
       companyWebsite: "https://saranyu.in/",
@@ -104,7 +104,7 @@ export const experiences: Experience[] = [
     id: 3,
     companyName: "Freelancer, Remote",
     duration: `November 2023 - March 2024`,
-    roles: ["Frontend Developer", "UI/UX Designer", "Full Stack developer"],
+    roles: ["Frontend Developer", "UI/UX Designer", "Backend developer"],
     tags: ["React", "Firebase", "Javascript", "Figma"],
     details: {
       description: `As a freelance developer, I worked with a variety of clients to create custom websites, web applications, and user interfaces. I specialized in React, NextJS, and TypeScript, building high-performance, responsive, and user-friendly applications that met the unique needs of each client. I collaborated closely with clients to understand their vision and goals, translating them into engaging, interactive digital experiences.`,
@@ -133,11 +133,6 @@ export const faqData: FAQItem[] = [
     question: "Can you adapt quickly to new tools and changing requirements?",
     answer:
       "Absolutely. I enjoy learning new stacks and evolving with project scope. If a new framework, API, or pattern is needed, I research fast, prototype, and implement a solution that fits the goal.",
-  },
-  {
-    question: "What’s your approach to deployment and modern web standards?",
-    answer:
-      "I deploy to platforms like Vercel, Netlify, and AWS. My focus is responsive UIs, performance optimization, solid SEO, and clean, scalable code. I’m comfortable with Git-based workflows and collaborative development.",
   },
   {
     question: "Do you own projects end-to-end?",

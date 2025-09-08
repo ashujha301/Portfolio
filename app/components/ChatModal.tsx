@@ -21,21 +21,20 @@ interface ChatModalProps {
 const SECURITY_CONFIG = {
   MAX_MESSAGE_LENGTH: 500,
   MIN_MESSAGE_LENGTH: 1,
-  TYPING_DELAY: 1000, // (kept for reference; no longer throttling keystrokes)
+  TYPING_DELAY: 1000,
   MAX_MESSAGES_PER_SESSION: 20,
 };
 
 const SOFT_ERROR_FALLBACK =
   "I might be responding to someone else. I will be able to help you better after your next question.";
-const SOFT_ERROR_SNIPPET = "I might be responding to someone else";
 
 // Input sanitization used while typing (do NOT trim here)
 function sanitizeForInput(input: string): string {
   if (typeof input !== 'string') return '';
   return input
-    .replace(/[<>]/g, '')
-    .replace(/javascript:/gi, '')
-    .replace(/on\w+\s*=/gi, '');
+    .replace(/[<>]/g, '')         // strip HTML angle brackets
+    .replace(/javascript:/gi, '') // strip javascript: protocol
+    .replace(/on\w+\s*=/gi, '');  // strip inline event handlers
 }
 
 // Input sanitization used right before sending (includes trim)
@@ -51,7 +50,6 @@ function validateMessage(message: string): { isValid: boolean; reason?: string }
   if (message.length > SECURITY_CONFIG.MAX_MESSAGE_LENGTH) {
     return { isValid: false, reason: `Message too long (max ${SECURITY_CONFIG.MAX_MESSAGE_LENGTH} characters)` };
   }
-  // Check for excessive repeated characters
   if (/(.)\1{20,}/.test(message)) {
     return { isValid: false, reason: 'Please avoid excessive repeated characters' };
   }
@@ -89,7 +87,7 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
     {
       id: '1',
       text:
-        "Hi there! 👋 I'm an AI assistant representing Ayush Jha, a Software Engineer with 2+ years of experience. Feel free to ask me about my skills, projects, experience, or anything related to my professional background!",
+        "Hi there! 👋 I'm an AI assistant representing Ayush Jha, a Software Engineer!",
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -102,26 +100,70 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  // Body scroll lock effect (preserves layout without fighting inner scroll)
+  // === TRUE BODY SCROLL LOCK (fixes scroll bleed on desktop, trackpads, iOS/Android) ===
+  const lockedScrollYRef = useRef(0);
+
   useEffect(() => {
-    if (isOpen) {
-      const originalOverflow = document.body.style.overflow;
-      const originalPaddingRight = document.body.style.paddingRight;
+    if (!isOpen) return;
 
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    // Save current scroll position
+    lockedScrollYRef.current = window.scrollY || window.pageYOffset || 0;
 
-      return () => {
-        document.body.style.overflow = originalOverflow;
-        document.body.style.paddingRight = originalPaddingRight;
-      };
+    // Lock <html> and <body> to prevent background scroll/overscroll
+    const html = document.documentElement;
+    const body = document.body;
+
+    const prevHtmlOverflow = html.style.overflow;
+    const prevHtmlOverscroll = (html.style as any).overscrollBehavior;
+    const prevBodyPosition = body.style.position;
+    const prevBodyTop = body.style.top;
+    const prevBodyWidth = body.style.width;
+    const prevBodyLeft = body.style.left;
+    const prevBodyRight = body.style.right;
+    const prevBodyTouchAction = body.style.touchAction;
+    const prevBodyOverflow = body.style.overflow;
+
+    html.style.overflow = 'hidden';
+    (html.style as any).overscrollBehavior = 'none'; // avoid rubber-banding on Mac/iOS
+    body.style.position = 'fixed';
+    body.style.top = `-${lockedScrollYRef.current}px`;
+    body.style.width = '100%';
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.touchAction = 'none'; // block scrolling gestures
+    body.style.overflow = 'hidden';
+
+    // Optional: compensate layout shift from scrollbar (desktop)
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const prevBodyPaddingRight = body.style.paddingRight;
+    if (scrollbarWidth > 0) {
+      body.style.paddingRight = `${scrollbarWidth}px`;
     }
+
+    return () => {
+      // Restore styles
+      html.style.overflow = prevHtmlOverflow;
+      (html.style as any).overscrollBehavior = prevHtmlOverscroll || '';
+      body.style.position = prevBodyPosition;
+      body.style.top = prevBodyTop;
+      body.style.width = prevBodyWidth;
+      body.style.left = prevBodyLeft;
+      body.style.right = prevBodyRight;
+      body.style.touchAction = prevBodyTouchAction;
+      body.style.overflow = prevBodyOverflow;
+      body.style.paddingRight = prevBodyPaddingRight || '';
+
+      // Restore scroll position
+      window.scrollTo(0, lockedScrollYRef.current);
+    };
   }, [isOpen]);
 
   const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   useEffect(() => {
@@ -131,7 +173,9 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
   // Focus input when modal opens
   useEffect(() => {
     if (isOpen && inputRef.current) {
-      const timer = setTimeout(() => inputRef.current?.focus(), 300);
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 300);
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
@@ -220,19 +264,35 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
       });
 
       clearTimeout(timeout);
-      const data = await response.json();
+      const data = await response.json().catch(() => ({} as any));
 
+      // Show server-provided error to the user instead of generic fallback
       if (!response.ok) {
         if (response.status === 429) {
           setIsRateLimited(true);
-          if (data.retryAfter) {
+          if (data?.retryAfter) {
             setRateLimitEndTime(Date.now() + data.retryAfter * 1000);
           }
         }
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+
+        const serverMsg =
+          typeof data?.error === 'string'
+            ? data.error
+            : `Request failed (${response.status}). Please try again.`;
+
+        const errorBotMessage: Message = {
+          id: (Date.now() + 2).toString(),
+          text: sanitizeForInput(serverMsg).trim(),
+          sender: 'bot',
+          timestamp: new Date(),
+          isError: true,
+        };
+        setMessages((prev) => [...prev, errorBotMessage]);
+        setIsLoading(false);
+        return;
       }
 
-      if (data.success && data.reply) {
+      if (data?.success && data?.reply) {
         const sanitizedReply = sanitizeForInput(data.reply).trim();
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
@@ -242,20 +302,25 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
         };
         setMessages((prev) => [...prev, botMessage]);
       } else {
-        throw new Error(data.error || 'No response received');
+        const errorBotMessage: Message = {
+          id: (Date.now() + 2).toString(),
+          text: 'No response received. Please try again.',
+          sender: 'bot',
+          timestamp: new Date(),
+          isError: true,
+        };
+        setMessages((prev) => [...prev, errorBotMessage]);
       }
     } catch (error: any) {
       console.error('Error sending message:', error);
 
-      let errorMessage = "I might be responding to someone else. I will be able to help you better after your next question.";
+      let errorMessage = SOFT_ERROR_FALLBACK;
       if (error.name === 'AbortError') {
         errorMessage = 'Request timed out. Please try again with a shorter message.';
       } else if (error.message?.includes('401')) {
         errorMessage = "I'm experiencing authentication issues. Please try again later.";
       } else if (error.message?.includes('429')) {
-        errorMessage = error.message.includes('Rate limit')
-          ? error.message
-          : "I'm receiving too many requests right now. Please wait a moment and try again.";
+        errorMessage = "I'm receiving too many requests right now. Please wait a moment and try again.";
       } else if (error.message?.includes('Failed to fetch')) {
         errorMessage = "I can't connect to the server right now. Please check your internet connection and try again.";
       } else if (error.message?.includes('blocked')) {
@@ -292,10 +357,10 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
 
   // Sample questions for users
   const sampleQuestions = [
-    "What's your experience with React?",
+    "What's your experience with Next?",
     'Tell me about your projects',
     'What technologies do you work with?',
-    "What's your background?",
+    "What's your hobby?",
   ];
 
   const handleSampleQuestion = (question: string) => {
@@ -310,7 +375,8 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
     return Math.max(0, Math.ceil((rateLimitEndTime - Date.now()) / 1000));
   };
 
-  const isInputDisabled = isLoading || isRateLimited || messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION;
+  const isInputDisabled =
+    isLoading || isRateLimited || messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION;
 
   // Handle backdrop click - close only if clicked on backdrop, not modal content
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -321,14 +387,14 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 2 }}
+          animate={{ opacity: 3 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6"
           style={{
-            background: 'rgba(20, 20, 30, 0.25)',
-            backdropFilter: 'blur(16px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+            background: 'rgba(20, 20, 20, 0.65)',
+            backdropFilter: 'blur(32px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(32px) saturate(180%)',
           }}
           onClick={handleBackdropClick}
         >
@@ -338,16 +404,19 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="w-full max-w-2xl h-[85vh] sm:h-[75vh] rounded-2xl flex flex-col overflow-hidden border border-white/10 shadow-2xl"
+            className="w-full max-w-6xl h-[85vh] sm:h-[80vh] rounded-2xl border border-white/10 shadow-2xl"
             style={{
-              background: 'rgba(30, 30, 40, 0.65)',
-              backdropFilter: 'blur(24px) saturate(180%)',
-              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              background: 'rgba(30, 30, 40, 0.9)',
+              backdropFilter: 'blur(50px) saturate(150%)',
+              WebkitBackdropFilter: 'blur(50px) saturate(150%)',
+              display: 'flex',
+              flexDirection: 'column',
+              overflow: 'hidden',
             }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="text-white px-6 py-4 flex justify-between items-center border-b border-white/10 bg-transparent">
+            <div className="text-white px-6 py-4 flex justify-between items-center border-b border-white/10 bg-transparent flex-shrink-0">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10">
                   <div
@@ -372,14 +441,14 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                     </span>
                   </div>
                   <p className="text-sm opacity-90">
-                    Ask about experience, skills & projects ({messageCount}/{SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION})
+                    Ask about experience, skills, projects & hobbies ({messageCount}/{SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION})
                   </p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
                 <button
                   onClick={clearChat}
-                  className="text-xs px-2 py-1 rounded bg-white/10 hover:bg白/20 transition-colors"
+                  className="text-xs px-2 py-1 rounded bg-white/10 hover:bg-white/20 transition-colors"
                   disabled={isLoading}
                 >
                   Clear
@@ -395,7 +464,7 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="px-6 py-2 bg-orange-500/20 border-b border-orange-500/30"
+                className="px-6 py-2 bg-orange-500/20 border-b border-orange-500/30 flex-shrink-0"
               >
                 <div className="flex items-center space-x-2 text-orange-200">
                   <AlertCircle size={16} />
@@ -406,15 +475,22 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
 
             {/* Messages (scrollable area) */}
             <div
-              className="flex-1 overflow-y-auto px-4 py-3 space-y-4 bg-transparent scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30"
+              ref={messagesContainerRef}
+              className="flex-1 px-4 py-3 space-y-4 bg-transparent"
               style={{
-                // Ensures smooth, momentum scrolling on iOS and proper wheel behavior on desktop
+                overflowY: 'auto',
+                overflowX: 'hidden',
                 WebkitOverflowScrolling: 'touch',
-                touchAction: 'manipulation',
-                // You can remove this if it interferes with nested scroll on some Android browsers:
-                // overscrollBehavior: 'contain',
+                scrollBehavior: 'smooth',
+                // The key lines below prevent scroll chaining to the page:
+                overscrollBehavior: 'contain',     // modern browsers
+                touchAction: 'pan-y',              // allow vertical pan only inside
+                // Optional scrollbar cosmetics:
                 scrollbarWidth: 'thin',
               }}
+              // Stop wheel events from bubbling to the overlay/page (extra safety)
+              onWheel={(e) => e.stopPropagation()}
+              onTouchMove={(e) => e.stopPropagation()}
             >
               {messages.map((message) => (
                 <motion.div
@@ -425,21 +501,27 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                 >
                   <div className={`flex max-w-[85%] ${message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                     <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${message.sender === 'user' ? 'bg-blue-500 ml-2' : 'mr-2'
-                        }`}
+                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
+                        message.sender === 'user' ? 'bg-blue-500 ml-2' : 'mr-2'
+                      }`}
                     >
                       {message.sender === 'user' ? <User size={16} className="text-white" /> : <BotAvatar />}
                     </div>
                     <div
-                      className={`p-3 rounded-lg shadow-sm ${message.sender === 'user' ? 'bg-blue-500 text-white rounded-br-none' : `rounded-bl-none ${message.isError ? 'border-red-300' : ''}`
-                        }`}
+                      className={`p-3 rounded-lg shadow-sm ${
+                        message.sender === 'user'
+                          ? 'bg-blue-500 text-white rounded-br-none'
+                          : `rounded-bl-none ${message.isError ? 'border-red-300' : ''}`
+                      }`}
                       style={
                         message.sender === 'bot'
                           ? {
-                            backgroundColor: message.isError ? 'rgba(254, 226, 226, 0.1)' : 'var(--background)',
-                            color: message.isError ? '#ef4444' : 'var(--foreground)',
-                            border: `1px solid ${message.isError ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-color)'}`,
-                          }
+                              backgroundColor: message.isError ? 'rgba(254, 226, 226, 0.1)' : 'var(--background)',
+                              color: message.isError ? '#ef4444' : 'var(--foreground)',
+                              border: `1px solid ${
+                                message.isError ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-color)'
+                              }`,
+                            }
                           : {}
                       }
                     >
@@ -464,7 +546,10 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                     <div className="mr-2">
                       <BotAvatar />
                     </div>
-                    <div className="p-3 rounded-lg shadow-sm rounded-bl-none" style={{ backgroundColor: 'var(--background)', border: '1px solid var(--border-color)' }}>
+                    <div
+                      className="p-3 rounded-lg shadow-sm rounded-bl-none"
+                      style={{ backgroundColor: 'var(--background)', border: '1px solid var(--border-color)' }}
+                    >
                       <TypingIndicator />
                     </div>
                   </div>
@@ -493,7 +578,11 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
               {/* Session limit warning */}
               {messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION - 3 &&
                 messageCount < SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION && (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="px-4 py-2 mx-2 rounded-lg bg-yellow-500/20 border border-yellow-500/30">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="px-4 py-2 mx-2 rounded-lg bg-yellow-500/20 border border-yellow-500/30"
+                  >
                     <div className="flex items-center space-x-2 text-yellow-200">
                       <AlertCircle size={16} />
                       <span className="text-sm">
@@ -507,7 +596,7 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
             </div>
 
             {/* Input */}
-            <div className="px-6 py-4 border-t border-white/10 bg-transparent">
+            <div className="px-6 py-4 border-t border-white/10 bg-transparent flex-shrink-0">
               <div className="flex space-x-2">
                 <input
                   ref={inputRef}
@@ -519,11 +608,12 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                     isRateLimited
                       ? `Rate limited - wait ${getRemainingTime()}s...`
                       : messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION
-                        ? 'Session limit reached - refresh to continue'
-                        : 'Ask me anything about my professional experience...'
+                      ? 'Session limit reached - refresh to continue'
+                      : 'Ask me anything about my professional experience...'
                   }
-                  className={`flex-1 rounded-xl px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 border transition-all ${isInputDisabled ? 'bg-white/5 border-white/5 cursor-not-allowed' : 'bg-white/10 border-white/10 focus:ring-blue-400'
-                    }`}
+                  className={`flex-1 rounded-xl px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 border transition-all ${
+                    isInputDisabled ? 'bg-white/5 border-white/5 cursor-not-allowed' : 'bg-white/10 border-white/10 focus:ring-blue-400'
+                  }`}
                   disabled={isInputDisabled}
                   maxLength={SECURITY_CONFIG.MAX_MESSAGE_LENGTH}
                   autoComplete="off"
@@ -532,8 +622,9 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                 <button
                   onClick={sendMessage}
                   disabled={!input || isInputDisabled}
-                  className={`text-white p-3 rounded-xl transition-all flex items-center justify-center min-w-[48px] ${isInputDisabled || !input ? 'bg-gray-500 cursor-not-allowed opacity-50' : 'bg-blue-500 hover:bg-blue-600'
-                    }`}
+                  className={`text-white p-3 rounded-xl transition-all flex items-center justify-center min-w-[48px] ${
+                    isInputDisabled || !input ? 'bg-gray-500 cursor-not-allowed opacity-50' : 'bg-blue-500 hover:bg-blue-600'
+                  }`}
                   title={
                     isRateLimited ? 'Rate limited' : messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION ? 'Session limit reached' : 'Send message'
                   }
@@ -546,7 +637,9 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
                   {isRateLimited && `Rate limited for ${getRemainingTime()}s`}
                   {messageCount >= SECURITY_CONFIG.MAX_MESSAGES_PER_SESSION && 'Session limit reached'}
                 </span>
-                <span>{input.length}/{SECURITY_CONFIG.MAX_MESSAGE_LENGTH}</span>
+                <span>
+                  {input.length}/{SECURITY_CONFIG.MAX_MESSAGE_LENGTH}
+                </span>
               </div>
             </div>
           </motion.div>

@@ -173,10 +173,13 @@ const ChatMe = () => {
                     </div>
 
                     {/* DESKTOP: Emote Buttons - Left side */}
-                    <div className="hidden md:flex absolute left-12 top-1/2 -translate-y-1/2 flex-col items-center space-y-4">
-                        <h3 className={`text-xl font-sans font-bold ${mounted ? (theme === "dark" ? "text-white/80" : "text-black/80") : "text-transparent"} mb-2`}>
+                    <div className="hidden md:flex absolute left-14 top-1/2 -translate-y-1/2 flex-col items-center space-y-4">
+                        <h3 className={`text-xl font-sans font-bold ${mounted ? (theme === "dark" ? "text-white/80" : "text-black/80") : "text-transparent"}`}>
                             Emotes
                         </h3>
+                        <p className={`font-sans font-bold text-sm ${mounted ? (theme === "dark" ? "text-white/45" : "text-gray-400") : "text-transparent"}`}>
+                            ✨Hover
+                        </p>
                         {emoteAnimations.map((emote) => {
                             const IconComponent = emote.icon;
                             return (
@@ -274,11 +277,6 @@ const ChatMe = () => {
                 </div>
                 {/* {Scroll down to view portfolio} */}
                 <div className="mt-8 flex-col space-y-6">
-                    <div className="hidden md:block space-y-3 px-2">
-                        <p className={`font-sans font-bold text-center text-sm ${mounted ? (theme === "dark" ? "text-white/45" : "text-gray-400") : "text-transparent"} leading-relaxed`}>
-                            ✨ Hover over the buttons to try the emotes!
-                        </p>
-                    </div>
                     {/* Buttons Arrow */}
                     <div className="flex justify-center space-x-6">
                         <div className="flex flex-col items-center space-y-2">
