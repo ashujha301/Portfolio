@@ -1,7 +1,7 @@
 // app/api/chat/route.ts
 import OpenAI from 'openai';
 import { NextRequest, NextResponse } from 'next/server';
-import { projects, experiences, socials, faqData } from '../../data';
+import { projects, experiences, socials, faqData, college } from '../../data';
 
 export const runtime = 'edge';
 
@@ -266,6 +266,7 @@ export async function POST(req: NextRequest) {
       const EXPERIENCES_JSON = JSON.stringify(experiences);
       const SOCIALS_JSON = JSON.stringify(socials);
       const FAQ_JSON = JSON.stringify(faqData);
+      const COLLEGE_JSON = JSON.stringify(college);
 
       return `
 You are Ayush Jha answering in first person (“I”), sounding human and concise.
@@ -295,6 +296,7 @@ PROJECTS = ${PROJECTS_JSON}
 EXPERIENCES = ${EXPERIENCES_JSON}
 SOCIALS = ${SOCIALS_JSON}
 FAQ = ${FAQ_JSON}
+COLLEGE = ${COLLEGE_JSON}
 BEYOND_THE_CODE = [
   {"topic":"Anime & figures","detail":"Favorites: Eren Yeager (AoT) and Roronoa Zoro (One Piece)."},
   {"topic":"Travel","detail":"Traveler & beach person—love road trips and coastal drives."},

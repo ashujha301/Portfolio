@@ -150,3 +150,21 @@ export const faqData: FAQItem[] = [
       "Clear communication, regular checkpoints, and attention to detail. I ship maintainable code, provide realistic estimates, and support the product after launch to ensure long-term reliability.",
   },
 ];
+
+export const college: College[] = [
+  {
+    name: "Reva University",
+    degree: "Bachelor of Technology in Electronics and Communication Engineering ( Computer Science Minor )",
+    duration: "2019 - 2023",
+    website: "https://www.reva.edu.in/",
+    place: "Bengaluru, India",
+  },
+];
+
+export type College = {
+  name: string;
+  degree: string;
+  duration: string;
+  website: string;
+  place: string;
+};
