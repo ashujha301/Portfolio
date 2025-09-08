@@ -23,7 +23,7 @@ const SECURITY_CONFIG = {
   BLOCK_DURATION: 15 * 60 * 1000, // 15 minutes
   SUSPICIOUS_THRESHOLD: 10, // Block IP after 10 violations (burst heuristic)
   MAX_TOKENS: 200, // Reduced to prevent abuse
-  ALLOWED_ORIGINS: ['http://localhost:3000', 'https://yourdomain.com'], // Add your domains
+  ALLOWED_ORIGINS: ['http://localhost:3000', 'https://jhayush.netlify.app'], // Add your domains
 };
 
 // OpenAI client
