@@ -193,7 +193,7 @@ function Hero() {
                     </div>
                     <div>
                         <p className="lg:text-[5rem] text-6xl font-bold relative lg:bottom-[30vh] bottom-0 lg:top-[-5rem] top-[3vh] lg:ml-[6dvw] ml-0">Hi, I'm Ayush</p>
-                        <div className='flex justify-center items-center gap-10 relative bottom-[-9vh] lg:bottom-[4rem]'>
+                        <div className='hidden lg:flex md:flex justify-center items-center gap-10 relative bottom-[-9vh] lg:bottom-[4rem]'>
                             <Link className='hover:cursor-pointer' href={'https://github.com/ashujha301'}>
                                 <Github className="w-10 h-10" />
                             </Link>
