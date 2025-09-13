@@ -61,7 +61,7 @@ function AboutMe() {
     });
   });
 
-  // Core skill bubbles (icons) — from resume + experience
+  // Core skill bubbles (icons) - from resume + experience
   const skillsJson = [
     { name: "React.js", icon: <SiReact className="text-white w-5 h-5" />, ref: Skill1 },
     { name: "Next.js", icon: <SiNextdotjs className="text-white w-5 h-5" />, ref: Skill2 },
@@ -194,25 +194,25 @@ function AboutMe() {
               <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service1}>
                 <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <p className="break-words leading-relaxed">
-                  Anime & figure collector — proud weeb; favorites: <strong>Eren Yeager</strong> (AoT) & <strong>Roronoa Zoro</strong> (One Piece).
+                  Anime & figure collector - proud weeb; favorites: <strong>Eren Yeager</strong> (AoT) & <strong>Roronoa Zoro</strong> (One Piece).
                 </p>
               </div>
               <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service2}>
                 <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <p className="break-words leading-relaxed">
-                  Traveler & beach person — love road trips and coastal drives; beaches? always yes.
+                  Traveler & beach person - love road trips and coastal drives; beaches? always yes.
                 </p>
               </div>
               <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service3}>
                 <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <p className="break-words leading-relaxed">
-                  Sports & games — basketball regular, recently picked up pickleball, always up for badminton, football and down for game nights.
+                  Sports & games - basketball regular, recently picked up pickleball, always up for badminton, football and down for game nights.
                 </p>
               </div>
               <div className="flex flex-row gap-3 items-start sm:opacity-0" ref={Service4}>
                 <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <p className="break-words leading-relaxed">
-                  Certified spontaneous friend — I'm always ready for sudden plans: hikes, beaches, parties—say the word and I'm in.
+                  Certified spontaneous friend - I'm always ready for sudden plans: hikes, beaches, parties-say the word and I'm in.
                 </p>
               </div>
             </div>

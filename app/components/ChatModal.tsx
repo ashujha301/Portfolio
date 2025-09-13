@@ -195,7 +195,7 @@ export default function ChatModal({ isOpen, onClose }: ChatModalProps) {
     }
   }, [isRateLimited, rateLimitEndTime]);
 
-  // Handle input change — no throttling, no trim (fixes spacebar)
+  // Handle input change - no throttling, no trim (fixes spacebar)
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = sanitizeForInput(e.target.value);
     setInput(value);

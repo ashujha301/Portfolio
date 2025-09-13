@@ -184,7 +184,7 @@ export default function Footer() {
               </div>
 
               <MotionLink
-                href="/assets/Resume.pdf"
+                href="/assets/AyushJhaResume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 locale={false}
