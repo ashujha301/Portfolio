@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 
 export default function TextPath() {
   const container = useRef<HTMLDivElement>(null);
-  const path1 = useRef<SVGTextPathElement>();
-  const path2 = useRef<SVGTextPathElement>();
-  const path3 = useRef<SVGTextPathElement>();
+  const path1 = useRef<SVGTextPathElement>(null);
+  const path2 = useRef<SVGTextPathElement>(null);
+  const path3 = useRef<SVGTextPathElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: container,
