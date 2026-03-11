@@ -1,6 +1,7 @@
 "use client";
 import { motion, useInView } from "framer-motion";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, TwitterIcon } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
 import { useRef } from "react";
 import { socials } from "../data";
@@ -161,6 +162,16 @@ export default function Footer() {
               variants={iconVariants}
             >
               <div className="flex gap-4">
+                <MotionLink
+                  href={socials.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-lg hover:bg-blue-100 transition-colors duration-200"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <FaXTwitter size={24} className="text-blue-600" />
+                </MotionLink>
                 <MotionLink
                   href={socials.linkedin}
                   target="_blank"
