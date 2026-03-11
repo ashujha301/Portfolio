@@ -136,18 +136,17 @@ function AboutMe() {
             </div>
             <div className="flex flex-row gap-2 items-center" ref={Xp}>
               <CalendarDays />
-              <p className="mt-1 break-words">1.5+ years of experience</p>
+              <p className="mt-1 break-words">2+ years of experience</p>
             </div>
             <div className="flex flex-row gap-2 items-center" ref={Skill}>
               <Code />
-              <p className="mt-1 break-words">Software Engineer · Full-Stack Developer</p>
+              <p className="break-words">Machine Learning Engineer · Software Engineer</p>
             </div>
           </div>
 
           <p className="mt-6 w-full max-w-md text-left text-base sm:text-m break-words" ref={abtMe}>
-            Results-driven Software Engineer who loves solving hard problems and shipping impact. Based out of Bangalore, India.
-            I pair curiosity with disciplined execution to deliver maintainable software that moves the needle. I thrive in teams
-            that prize ownership, clarity, and momentum.
+            AI/ML Engineer building end-to-end ML and software systems for real products from data pipelines, 
+            modeling, and APIs to deployment and iteration. Comfortable moving fast, owning problems, and turning ideas into reliable, scalable systems.
           </p>
 
           <MotionLink

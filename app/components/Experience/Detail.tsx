@@ -127,6 +127,7 @@ export const Detail: React.FC<Props> = ({ details }) => {
         className="grid place-items-center mt-5 text-white mix-blend-difference cursor-pointer"
       >
         <ArrowDown size={24} className="sm:w-7 sm:h-7" />
+        <p className="hidden hover:text-md">click to expand</p>
       </motion.div>
     </>
   );

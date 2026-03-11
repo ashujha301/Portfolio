@@ -1,5 +1,5 @@
 import { experiences } from "@/app/data";
-import { DotIcon } from "lucide-react";
+import { DotIcon, MapPin } from "lucide-react";
 import Badge from "../ui/Badge";
 import { Detail } from "./Detail";
 
@@ -7,7 +7,7 @@ const Experiences = () => {
   return (
     <div className="space-y-0">
       {experiences.map(
-        ({ companyName, details, duration, id, roles, tags }, i) => (
+        ({ companyName, location, details, duration, id, roles, tags }, i) => (
           <div
             key={id}
             className="border-b-[1px] border-secondary p-4 sm:p-6 md:p-8"
@@ -18,6 +18,12 @@ const Experiences = () => {
                 <h2 className="tracking-widest text-lg sm:text-xl md:text-2xl break-words font-sans">
                   {companyName}
                 </h2>
+                <div className="flex justify-center lg:justify-start items-center mt-2">
+                  <MapPin size={18}/>
+                  <p className="tracking-widest break-words text-sm sm:text-base font-serif">
+                    {location}
+                  </p>
+                </div>
                 <div className="flex justify-center lg:justify-start items-center mt-2">
                   <DotIcon size={30} />
                   <p className="tracking-widest break-words text-sm sm:text-base font-serif">

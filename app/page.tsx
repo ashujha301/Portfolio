@@ -32,7 +32,7 @@ export default function Home() {
           stiffness: 300,
         }}
         className="hidden md:block
-          bg-black rounded-full fixed pointer-events-none
+          bg-black rounded-full fixed pointer-events-none z-[9999]
         "
       ></motion.div>
       <Navbar setHovered={setHovered} />
