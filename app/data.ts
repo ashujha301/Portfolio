@@ -101,7 +101,7 @@ export const projects: UnifiedProject[] = [
     description:
       "Full e-commerce UI clone with React and a Node/Express backend. Product listing, cart/checkout flow, responsive layout, routing and JWT-based auth. Deployed on Vercel.",
     githubLink: "https://github.com/ashujha301/Amazon-clone",
-    live: false,
+    live: true,
     statusLabel: "Side Project",
     imagePath: "/assets/projects/web/AmazonClone.png",
   }
@@ -129,8 +129,9 @@ export const aimlProjects: UnifiedProject[] = [
     description:
       "An AI-powered Chrome extension that enables touchless browser interaction using real-time hand gesture recognition. Built with MediaPipe and OpenCV to detect finger gestures for actions like scrolling, clicking, selecting text, and cursor control directly inside the browser tab. The system streams gesture data from a Python vision pipeline to the extension, enabling low-latency interaction and experimenting with real-world human–computer interaction using computer vision.",
     githubLink: "https://github.com/ashujha301/Zynk-Chrome-Extention",
-    live: false,
-    statusLabel: "Currently Building",
+    liveAppLink: "https://chromewebstore.google.com/detail/zynk-ai/emdoiabhlllnfhenaejgliopnddbpaga",
+    live: true,
+    statusLabel: "Available on Chrome Web Store",
     imagePath: "/assets/projects/ai-ml/zynk.png",
     videoPath: "assets/projects/ai-ml/Zynk-glimpse.mp4"
   },
@@ -190,7 +191,7 @@ export const aimlProjects: UnifiedProject[] = [
     description:
       "Machine learning system designed to detect fraudulent financial transactions using logistic regression. The project simulates a real production fraud detection pipeline including feature preprocessing, model training, evaluation, and prediction scoring. Built to replicate how banks and fintech platforms classify high-risk transactions in real-time using statistical models and probability scoring from scratch using.",
     githubLink: "https://github.com/ashujha301/ML-Models/tree/main/logistic_regression",
-    live: false,
+    live: true,
     statusLabel: "Working Prototype",
     imagePath: "/assets/projects/ai-ml/logreg.png",
     videoPath: "assets/projects/ai-ml/LogRegFast.mp4"
@@ -209,7 +210,7 @@ export const aimlProjects: UnifiedProject[] = [
     description:
       "End-to-end machine learning model that predicts loan approval decisions based on applicant financial attributes. Built from scratch without any ml libraries used, core maths and decision tree algorithms, including dataset preprocessing, feature engineering, model training, and evaluation. The system replicates the decision logic used by financial institutions to assess credit eligibility and automate lending decisions.",
     githubLink: "https://github.com/ashujha301/ML-Models/tree/main/decison_tree",
-    live: false,
+    live: true,
     statusLabel: "Completed ML Project",
     imagePath: "/assets/projects/ai-ml/dectree.png",
     videoPath: "assets/projects/ai-ml/DecTree-video.mp4"
