@@ -239,7 +239,7 @@ export const experiences: Experience[] = [
     id: 1,
     companyName: "Sort Tree",
     location: "London, United Kingdom - Remote",
-    duration: `November 2024 - Present`,
+    duration: `November 2025 - Present`,
     roles: ["Machine Learning Engineer", "AI/ML Engineer"],
     tags: ["Python", "MLOps", "FastAPI", "Tensorflow", "Pytorch", "LLMs", "RAG", "Feature Engineering", "Inference API", "ML", "Deep Learning"],
     details: {
