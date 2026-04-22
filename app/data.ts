@@ -137,47 +137,27 @@ export const aimlProjects: UnifiedProject[] = [
   },
   {
     id: 2,
-    name: "Deep Super Resolution",
-    tagline: "Turning blurry images into high-resolution detail (2X) - GPU accelerated, built from scratch",
+    name: "LangAI Dashboard",
+    tagline: "A hands-on platform to master AI engineering with real projects.",
     technologies: [
       "Python",
-      "PyTorch",
-      "CNN",
-      "Deep Learning",
-      "Computer Vision",
-      "GPU Acceleration",
-      "C++ kernels",
-      "Core Maths/Algorithms"
+      "LangChain",
+      "LangGraph",
+      "LLMs",
+      "RAG",
+      "Next.js",
+      "FastAPI"
     ],
     description:
-      "Deep learning based image super-resolution system that reconstructs high-resolution images from low-resolution inputs using convolutional neural networks. The project explores modern super-resolution techniques including residual learning and feature extraction layers to recover fine visual details. Built as an experimental research project to understand how neural networks enhance image clarity and reconstruct lost pixel information.",
-    githubLink: "https://github.com/ashujha301/Deep-super-resolution",
+      "LangAI Dashboard is a structured learning platform designed to deeply understand AI engineering concepts through real-world implementation. It provides a guided journey with sequential unlocking of sessions, covering LangChain, LangGraph, RAG, and AI agents. Each module includes hands-on coding tasks, quizzes, and challenges to reinforce learning. The platform also includes premium features for advanced content, making it a practical, project-based alternative to traditional courses.",
+    githubLink: "https://github.com/ashujha301/LangAI-mastery-dashboard",
     live: false,
-    statusLabel: "Started Development",
-    imagePath: "/assets/projects/in-progress.png"
+    statusLabel: "Actively Building",
+    imagePath: "/assets/projects/ai-ml/LangAi-dashboard.jpeg",
+    videoPath: "assets/projects/ai-ml/LangAI-Dashboard.mp4"
   },
   {
     id: 3,
-    name: "Job Search AI Agent",
-    tagline: "An autonomous AI agent that hunts jobs for you.",
-    technologies: [
-      "Python",
-      "LLMs",
-      "LangGraph",
-      "RAG",
-      "Vector Database",
-      "AI Agents",
-      "Web Scraping"
-    ],
-    description:
-      "Autonomous AI job search agent designed to discover, rank, and recommend highly relevant job opportunities across multiple job boards. The system combines web scraping pipelines with LLM reasoning and vector search to match job descriptions with user profiles, rank opportunities using semantic similarity, and automatically filter the best matches. Designed as a production-style agent system that mimics how modern AI copilots perform information retrieval and decision making.",
-    githubLink: "https://github.com/ashujha301/Job-Search-AI-Agent",
-    live: false,
-    statusLabel: "Actively Building",
-    imagePath: "/assets/projects/in-progress.png"
-  },
-  {
-    id: 4,
     name: "Real-Time Fraud Detection System",
     tagline: "Detect suspicious transactions before they happen - built from scratch",
     technologies: [
@@ -197,7 +177,7 @@ export const aimlProjects: UnifiedProject[] = [
     videoPath: "assets/projects/ai-ml/LogRegFast.mp4"
   },
   {
-    id: 5,
+    id: 4,
     name: "Loan Approval Prediction System",
     tagline: "Predicting loan approvals using decision trees - Built from scratch",
     technologies: [
@@ -214,11 +194,54 @@ export const aimlProjects: UnifiedProject[] = [
     statusLabel: "Completed ML Project",
     imagePath: "/assets/projects/ai-ml/dectree.png",
     videoPath: "assets/projects/ai-ml/DecTree-video.mp4"
-  }
+  },
+  {
+    id: 5,
+    name: "Deep Super Resolution",
+    tagline: "Turning blurry images into high-resolution detail (2X) - GPU accelerated, built from scratch",
+    technologies: [
+      "Python",
+      "PyTorch",
+      "CNN",
+      "Deep Learning",
+      "Computer Vision",
+      "GPU Acceleration",
+      "C++ kernels",
+      "Core Maths/Algorithms"
+    ],
+    description:
+      "Deep learning based image super-resolution system that reconstructs high-resolution images from low-resolution inputs using convolutional neural networks. The project explores modern super-resolution techniques including residual learning and feature extraction layers to recover fine visual details. Built as an experimental research project to understand how neural networks enhance image clarity and reconstruct lost pixel information.",
+    githubLink: "https://github.com/ashujha301/Deep-super-resolution",
+    live: false,
+    statusLabel: "Building Data Pipeline - Prefetch/batch loading/streaming",
+    imagePath: "/assets/projects/in-progress.png"
+  },
+  {
+    id: 6,
+    name: "Watcher",
+    tagline: "An intelligent codebase assistant that reviews, understands, and improves your code.",
+    technologies: [
+      "Python",
+      "LangChain",
+      "LangGraph",
+      "LLMs",
+      "RAG",
+      "Vector Database",
+      "FastAPI",
+      "GitHub API",
+      "Docker"
+    ],
+    description:
+      "Watcher is a production-grade AI system designed to understand entire codebases and automate developer workflows. It performs intelligent PR reviews, detects bugs and security issues, explains code changes, and ensures consistency across the repository. The system includes advanced capabilities like automated codebase documentation generation, API documentation mapping, and architecture analysis to help developers quickly understand complex systems. Built as a multi-agent pipeline, Watcher mimics how senior engineers review and reason about code at scale.",
+    // githubLink: "https://github.com/ashujha301/Job-Search-AI-Agent",
+    live: false,
+    statusLabel: "Building an end-to-end AI-powered code intelligence pipeline",
+    imagePath: "/assets/projects/in-progress.png"
+  },
 ];
 
 
-export const experienceSectionText = `Over the past 1.8+ years, i've had the opportunity to work on a wide range of complex projects, collaborate with talented individuals and learn from some of the best in the industry. Here are some of the highlights of my journey so far.`;
+export const experienceSectionText = `Over the past 2+ years, i've had the opportunity to work on a wide range of complex projects, collaborate with talented individuals and learn from some of the best in the industry. Here are some of the highlights of my journey so far.`;
 
 export type Experience = {
   id: number;
